@@ -10,7 +10,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { verify } from 'jsonwebtoken';
 import compression from 'compression';
-import { checkConnection } from '@auth/elasticsearch';
+// import { checkConnection } from '@auth/elasticsearch';
 import { appRoutes } from '@auth/routes';
 import { Channel } from 'amqplib';
 import { createConnection } from '@auth/queues/connection';
@@ -25,7 +25,7 @@ export function start(app: Application): void {
   standardMiddleware(app);
   routesMiddleware(app);
   startQueues();
-  startElasticSearch();
+ // startElasticSearch();
   authErrorHandler(app);
   startServer(app);
 }
@@ -65,9 +65,9 @@ async function startQueues(): Promise<void> {
   authChannel = await createConnection() as Channel;
 }
 
-function startElasticSearch(): void {
-  checkConnection();
-}
+// function startElasticSearch(): void {
+//   checkConnection();
+// }
 
 function authErrorHandler(app: Application): void {
   app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
